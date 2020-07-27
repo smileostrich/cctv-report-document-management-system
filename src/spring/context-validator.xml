@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+    <!-- Integrated Apache Commons Validator by Spring Modules -->              
+    <bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
+        <property name="validatorFactory" ref="validatorFactory"/>
+    </bean>
+
+    <bean id="validatorFactory" class="org.springmodules.validation.commons.DefaultValidatorFactory">
+        <property name="validationConfigLocations">
+            <list>
+                <!-- 밸리데이터 설정 -->
+				<value>/WEB-INF/config/validator/validator-rules.xml</value>
+<!-- 				<value>/WEB-INF/config/validator/AccessValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/DepartValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/ManagerValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/UserValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/ProgramValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/CmsValidator.xml</value> -->
+<!-- 				<value>/WEB-INF/config/validator/BannerValidator.xml</value> -->
+				<value>/WEB-INF/config/validator/BoardValidator.xml</value>
+<!-- 				<value>/WEB-INF/config/validator/CampValidator.xml</value> -->
+            </list>
+        </property>
+    </bean>
+   
+</beans>

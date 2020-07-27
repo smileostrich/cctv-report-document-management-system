@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean name="codeService"
+		class="egovframework.rte.fdl.idgnr.impl.EgovTableIdGnrServiceImpl"
+		destroy-method="destroy">
+		<property name="dataSource" ref="dataSource" />
+		<property name="blockSize" 	value="1"/>
+		<property name="nextIdFieldName" value="NEXT_ID"/>
+		<property name="table"	   	value="TBL_SEQUENCE"/>
+	</bean>
+	
+<!-- 	<bean name="departcode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="DPT"/> -->
+<!-- 		<property name="cipers" value="7" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="managercode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="MNG"/> -->
+<!-- 		<property name="cipers" value="7" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="programid" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="PRG"/> -->
+<!-- 		<property name="cipers" value="7" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="pagecode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="PAGE"/> -->
+<!-- 		<property name="cipers" value="6" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="skincode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="SKIN"/> -->
+<!-- 		<property name="cipers" value="6" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+	<bean name="boardid"
+		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl">
+		<property name="prefix" value="BOARD"/>
+		<property name="cipers" value="5" />
+		<property name="fillChar" value="0" />
+	</bean>
+	
+<!-- 	<bean name="boardidx" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="BOARDDATA"/> -->
+<!-- 		<property name="cipers" value="5" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="campcode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="CMP"/> -->
+<!-- 		<property name="cipers" value="5" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="rescode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="RS"/> -->
+<!-- 		<property name="cipers" value="10" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean name="refundcode" -->
+<!-- 		class="egovframework.rte.fdl.idgnr.impl.strategy.EgovIdGnrStrategyImpl"> -->
+<!-- 		<property name="prefix" value="REF"/> -->
+<!-- 		<property name="cipers" value="7" /> -->
+<!-- 		<property name="fillChar" value="0" /> -->
+<!-- 	</bean> -->
+</beans>
