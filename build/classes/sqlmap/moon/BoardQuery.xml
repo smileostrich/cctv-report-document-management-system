@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="moon.com.bean.SearchVO"/>
+	<typeAlias  alias="boardVO" type="moon.board.bean.BoardVO"/>
+<!-- 	<typeAlias  alias="boardAuthVO" type="mobiz.board.bean.AuthVO"/> -->
+	<typeAlias  alias="dataVO" type="moon.board.bean.DataVO"/>
+<!-- 	<typeAlias  alias="fileVO" type="mobiz.com.bean.FileVO"/> -->
+
+	
+	<select id="boardDAO.selectBoardCount" parameterClass="searchVO" resultClass="Integer">
+		<![CDATA[
+			SELECT
+				COUNT(BOARDID) AS CNT
+			FROM TBL_BOARD
+			WHERE DELYN = 'N'
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<![CDATA[
+				(BOARDNAME LIKE CONCAT('%', #searchValue#, '%'))
+			]]>
+		</isNotEmpty>
+	</select>
+	
+	<select id="boardDAO.selectBoardList" parameterClass="searchVO" resultClass="boardVO">
+		<![CDATA[
+			SELECT
+				BOARDID, BOARDNAME
+			FROM (
+				SELECT
+					ROWNUM AS RNUM, BOARDID, BOARDNAME
+				FROM (
+					SELECT
+						BOARDID, BOARDNAME
+					FROM TBL_BOARD
+					WHERE DELYN = 'N'
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<![CDATA[
+				(BOARDNAME LIKE CONCAT('%', #searchValue#, '%'))
+			]]>
+		</isNotEmpty>
+		<![CDATA[
+					ORDER BY BOARDID ASC
+				) TB1 WHERE ROWNUM <= #lastIndex#
+			) TB2 WHERE RNUM > #firstIndex#
+		]]>
+	</select>
+	
+	<select id="boardDAO.selectBoardView" parameterClass="searchVO" resultClass="boardVO">
+		<![CDATA[
+			SELECT
+				BOARDID, BOARDNAME, TOP, SECRET, REPLY, CMT, UPLOAD, UPCNT, UPSIZE, UPEXT, PAGEUNIT, PAGESIZE
+			FROM TBL_BOARD
+			WHERE DELYN = 'N'
+			AND (BOARDID = #searchCode# OR BOARDID = #pageid#)
+		]]>
+	</select>
+	
+	<insert id="boardDAO.insertBoard" parameterClass="boardVO">
+		<![CDATA[
+			INSERT INTO TBL_BOARD
+				(BOARDID, BOARDNAME, TOP, SECRET, REPLY, CMT, UPLOAD, UPCNT, UPSIZE, UPEXT, PAGEUNIT, PAGESIZE, REGID, UPTID)
+			VALUES
+				(#boardid#, #boardname#, #top#, #secret#, #reply#, #cmt#, #upload#, #upcnt#, #upsize#, #upext#, #pageunit#, #pagesize#, #regid#, #uptid#)
+		]]>
+	</insert>
+	
+	<update id="boardDAO.updateBoard" parameterClass="boardVO">
+		<![CDATA[
+			UPDATE TBL_BOARD SET
+				BOARDID = #boardid#,
+				BOARDNAME = #boardname#,
+				TOP = #top#,
+				SECRET = #secret#,
+				REPLY = #reply#,
+				CMT = #cmt#,
+				UPLOAD = #upload#,
+				UPCNT = #upcnt#,
+				UPSIZE = #upsize#,
+				UPEXT = #upext#,
+				PAGEUNIT = #pageunit#,
+				PAGESIZE = #pagesize#,
+				REGID = #regid#,
+				UPTID = #uptid#,
+				UPTDATE = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+			WHERE BOARDID = #boardid#
+		]]>
+	</update>
+	
+	<update id="boardDAO.deleteBoard" parameterClass="boardVO">
+		<![CDATA[
+			UPDATE TBL_BOARD SET
+				DELYN = 'Y',
+				UPTID = #uptid#,
+				UPTDATE = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+			WHERE BOARDID = #searchCode#
+		]]>
+	</update>
+	
+	
+	
+	<select id="dataDAO.selectRecordCount" parameterClass="searchVO" resultClass="Integer">
+		<![CDATA[
+			SELECT
+				COUNT(IDX) AS CNT
+			FROM 
+				TBL_BOARD_DATA
+			WHERE
+				DELYN = 'N'
+			AND
+				BOARDID = '1'
+			AND DATE_FORMAT(NOW(), '%Y%m%d%H%i') BETWEEN SDATE AND EDATE
+		]]>
+		<isNotEqual property="groupid" compareValue="ADMINISTRATOR">
+			<isEqual prepend="AND" property="searchType" compareValue="Y">
+				<![CDATA[
+					(REGID = #usrId# OR TOP = 'Y')
+				]]>
+			</isEqual>
+		</isNotEqual>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<![CDATA[
+				(TITLE LIKE CONCAT('%', #searchValue#, '%') OR CONTENTS LIKE CONCAT('%', #searchValue#, '%'))
+			]]>
+		</isNotEmpty> 
+	</select>
+	
+	<select id="dataDAO.selectRecordList" parameterClass="searchVO" resultClass="dataVO">
+		<![CDATA[
+			SELECT 
+				A.IDX, A.PIDX, A.DEPTH, A.LEV, A.TOP, A.SECRET, A.SDATE, A.EDATE, A.TITLE, A.REGNAME, A.CONTENTS, A.REGID, A.REGDATE, A.STATE, TEL
+			FROM 
+				TBL_BOARD_DATA A
+				LEFT JOIN 
+					TBL_USER B
+				ON
+					B.USERID = A.REGID
+			WHERE 
+				DELYN = 'N'
+		]]>
+		<isNotEmpty prepend="AND" property="searchValue">
+			<![CDATA[
+					(TITLE LIKE CONCAT('%', #searchValue#, '%') OR CONTENTS LIKE CONCAT('%', #searchValue#, '%'))
+			]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="searchType">
+			<![CDATA[
+					(STATE LIKE CONCAT('%', #searchType#, '%'))
+			]]>
+		</isNotEmpty>
+		<![CDATA[
+			ORDER BY A.REGDATE DESC
+		]]>
+	</select>
+	
+	<select id="dataDAO.selectRecordView" parameterClass="searchVO" resultClass="dataVO">
+		<![CDATA[
+	         SELECT
+	            BOARDID, IDX, PIDX, DEPTH, LEV, TOP, SECRET, SDATE, EDATE, TITLE, REGNAME, CONTENTS, REGID, REGDATE, STATE, PERFORMER, B.TEL
+	        FROM 
+	        	TBL_BOARD_DATA A
+	        	LEFT JOIN 
+					TBL_USER B
+				ON
+					B.USERID = A.REGID
+	        WHERE 
+	        	DELYN = 'N' AND BOARDID = '1'  AND IDX = #searchIdx#
+		]]>
+	</select>
+	
+	<insert id="dataDAO.insertRecordData" parameterClass="dataVO">
+		<![CDATA[
+			INSERT INTO TBL_BOARD_DATA
+				(BOARDID, IDX, PIDX, DEPTH, LEV, TOP, SECRET, SDATE, EDATE, TITLE, REGNAME, CONTENTS, REGID, UPTID, REGDATE, UPTDATE, STATE, PERFORMER)
+			VALUES
+				('1', #idx#, #pidx#, #depth#, #lev#, #top#, #secret#, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), '9999-12-31',
+				#title#, #regname#, #contents#, #regid#, #uptid#, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), #state#, #performer#)
+		]]>
+	</insert>
+
+	<update id="dataDAO.updateRecordData" parameterClass="dataVO">
+		<![CDATA[
+			UPDATE TBL_BOARD_DATA 
+			SET
+				TOP = #top#,
+				SECRET = #secret#,
+				SDATE = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'),
+				EDATE = '9999-12-31',
+				TITLE = #title#,
+				CONTENTS = #contents#,
+				UPTID = #uptid#,
+				UPTDATE = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'),
+				STATE = #state#,
+				PERFORMER = #performer#
+			WHERE IDX = #searchIdx#
+		]]>
+	</update>
+	
+	<update id="dataDAO.deleteRecordData" parameterClass="dataVO">
+		<![CDATA[
+			UPDATE TBL_BOARD_DATA
+			   SET DELYN = 'Y',
+			       UPTID = #uptid#,
+			       UPTDATE = DATE_FORMAT(NOW(), '%Y%-m%-d %H:%i:%s')
+			 WHERE IDX = #searchIdx#
+		]]>
+	</update>
+	
+</sqlMap>

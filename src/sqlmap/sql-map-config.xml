@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+<!-- 	<sqlMap resource="sqlmap/moon/AccessQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/BannerQuery.xml"/> -->
+	<sqlMap resource="sqlmap/moon/BoardQuery.xml"/>
+<!-- 	<sqlMap resource="sqlmap/moon/CampQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/CmsQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/DepartQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/ManagerQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/ProgramQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/StatsQuery.xml"/> -->
+<!-- 	<sqlMap resource="sqlmap/moon/TestCampQuery.xml"/> -->
+	<sqlMap resource="sqlmap/moon/UserQuery.xml"/>
+</sqlMapConfig>

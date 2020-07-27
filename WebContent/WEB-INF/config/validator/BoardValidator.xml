@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC 
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN" 
+    "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+    
+    <formset>
+        <form name="boardVO">
+        	<field property="boardname" depends="required">
+        		<arg0 key="label.board.boardname"/>
+			</field>
+			<field property="upcnt" depends="required, integer">
+        		<arg0 key="label.board.upcnt"/>
+			</field>
+			<field property="upsize" depends="required, integer">
+        		<arg0 key="label.board.upsize"/>
+			</field>
+			<field property="pageunit" depends="required, integer">
+        		<arg0 key="label.board.pageunit"/>
+			</field>
+			<field property="pagesize" depends="required, integer">
+        		<arg0 key="label.board.pagesize"/>
+			</field>
+        </form>
+    </formset>
+    
+<!--     <formset> -->
+<!--         <form name="boardDataVO"> -->
+<!--         	<field property="title" depends="required, minlength"> -->
+<!--         		<arg0 key="lable.data.title" /> -->
+<!--         		<arg1 key="2" /> -->
+<!-- 	                <var> -->
+<!-- 		                <var-name>minlength</var-name> -->
+<!-- 		                <var-value>2</var-value> -->
+<!-- 	                </var> -->
+<!-- 			</field> -->
+<!-- 			<field property="title" depends="maxlength"> -->
+<!--         		<arg0 key="lable.data.title" /> -->
+<!-- 	            <arg1 key="100" /> -->
+<!-- 	                <var> -->
+<!-- 		                <var-name>maxlength</var-name> -->
+<!-- 		                <var-value>100</var-value> -->
+<!-- 	                </var> -->
+<!-- 			</field> -->
+<!-- 			<field property="contents" depends="required, minlength"> -->
+<!--         		<arg0 key="lable.data.contents" /> -->
+<!--         		<arg1 key="10" /> -->
+<!-- 	                <var> -->
+<!-- 		                <var-name>minlength</var-name> -->
+<!-- 		                <var-value>10</var-value> -->
+<!-- 	                </var> -->
+<!-- 			</field> -->
+<!--         </form> -->
+<!--     </formset> -->
+    
+<!--     <formset> -->
+<!--         <form name="commentVO"> -->
+<!--         	<field property="contents" depends="required, minlength"> -->
+<!--         		<arg0 key="lable.data.comments" /> -->
+<!--         		<arg1 key="5" /> -->
+<!-- 	                <var> -->
+<!-- 		                <var-name>minlength</var-name> -->
+<!-- 		                <var-value>5</var-value> -->
+<!-- 	                </var> -->
+<!-- 			</field> -->
+<!-- 			<field property="contents" depends="maxlength"> -->
+<!--         		<arg0 key="lable.data.comments" /> -->
+<!-- 	            <arg1 key="1000" /> -->
+<!-- 	                <var> -->
+<!-- 		                <var-name>maxlength</var-name> -->
+<!-- 		                <var-value>1000</var-value> -->
+<!-- 	                </var> -->
+<!-- 			</field> -->
+<!--         </form> -->
+<!--     </formset> -->
+
+</form-validation>

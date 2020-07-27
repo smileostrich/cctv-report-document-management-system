@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* Common */
+@font-face{font-family:'noto_black'; src:url('/common/font/NotoSansKR-Black.otf')}
+@font-face{font-family:'noto_bold'; src:url('/common/font/NotoSansKR-Bold.otf')}
+@font-face{font-family:'noto_light'; src:url('/common/font/NotoSansKR-Light.otf')}
+@font-face{font-family:'noto_medium'; src:url('/common/font/NotoSansKR-Medium.otf')}
+@font-face{font-family:'noto_regular'; src:url('/common/font/NotoSansKR-Regular.otf')}
+@font-face{font-family:'noto_thin'; src:url('/common/font/NotoSansKR-Thin.otf')}
+
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- 프로퍼티 정보 설정 -->
+	<bean name="propertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
+		<property name="properties">
+	        <map>
+				<!-- 기본 페이지 설정 -->
+	        	<entry key="pageUnit" value="10"/>
+	        	<entry key="pageSize" value="10"/>
+	        	
+				<!-- 업로드 사이즈 설정 -->
+	        	<entry key="uploadSize" value="10"/>
+	        	
+	        	<!-- 업로드 확장자 설정 -->
+	        	<entry key="fileExt" value="txt,hwp,pdf,doc,docx,xls,xlsx,ppt,pptx,zip"/>
+	        	<entry key="imageExt" value="gif,jpg,png"/>
+	        	
+	        	<!-- 업로드 경로 설정 -->
+<!--  	        	<entry key="bannerPath" value="D:/PROJECT/WORKSPACE/upload/banner/"/> -->
+	        	<entry key="boardPath" value="D:/PROJECT/WORKSPACE/upload/board/"/>
+<!-- 	        	<entry key="subPath" value="D:/PROJECT/WORKSPACE/upload/sub/"/> -->
+<!-- 	        	<entry key="smartEditorPath" value="D:/PROJECT/WORKSPACE/upload/smartEditor/"/> -->
+<!-- 	        	<entry key="lgdacomPath" value="D:/PROJECT/WORKSPACE/mobiz_auto/target/mobiz_auto-1.0.0/lgdacom"/>  -->
+	        </map>
+		</property>
+	</bean>
+</beans>	
